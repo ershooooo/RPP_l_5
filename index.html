@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Лабораторная работа</title>
+</head>
+<body>
+    <h1>Лабораторная работа по веб-разработке</h1>
+    <p>Описание лабораторной работы...</p>
+    {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">Выход</a>
+    {% endif %}
+</body>
+</html>
