@@ -4,14 +4,14 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-app.secret_key = '09990'
+app.secret_key='09990'
 user_db = "ershtrub"
-host_ip = "ershtrub.mysql.pythonanywhere-services.com"
+host_ip = "127.0.0.1"
 host_port = "5432"
-database_name = "ershtrub$lab5"
+database_name = "lab5"
 password = "postgres"
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{user_db}:{password}@{host_ip}:{host_port}/{database_name}'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{user_db}:{password}@{host_ip}:{host_port}/{database_name}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -89,5 +89,6 @@ def logout():
 
 
 if __name__ == '__main__':
+  with app.app_context():
     db.create_all()
-    app.run(debug=True)
+  app.run(debug=True)
