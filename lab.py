@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-app.secret_key='09990'
+app.secret_key = '09990'
 user_db = "ershtrub"
 host_ip = "127.0.0.1"
 host_port = "5432"
@@ -42,7 +42,7 @@ def login():
     if request.method == 'GET':
         return render_template('login.html')
 
-    errors = []  # Используем список для хранения ошибок
+    errors = []
     email = request.form.get('email')
     password = request.form.get('password')
     user = User.query.filter_by(email=email).first()
