@@ -42,26 +42,28 @@ def login():
     if request.method == 'GET':
         return render_template('login.html')
 
-    errors = ''
+    errors = []  # Используем список для хранения ошибок
     email = request.form.get('email')
     password = request.form.get('password')
     user = User.query.filter_by(email=email).first()
 
     # Ошибка: поля не заполнены
     if email == '' or password == '':
-        errors = 'Пожалуйста, заполните все поля'
-        return render_template('login.html', errors=errors, email=email, password=password)
+        errors.append('Пожалуйста, заполните все поля')
 
     # Ошибка: пользователь отсутствует
     if user is None:
-        errors = 'Такой пользователь отсутствует'
-        return render_template('login.html', errors=errors, email=email, password=password)
+        errors.append('Такой пользователь отсутствует')
+
+    # Ошибка: неправильный пароль
+    if user and user.password != password:
+        errors.append('Неверный пароль')
 
     if user and user.password == password:
         login_user(user)
         return redirect(url_for('index'))
 
-    return render_template('signup.html')
+    return render_template('login.html', errors=errors, email=email, password=password)
 
 # Страница регистрации
 @app.route('/signup', methods=['GET', 'POST'])

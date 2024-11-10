@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
 <body>
     <h1>Регистрация</h1>
@@ -15,7 +18,7 @@
         <label for="password">Password:</label>
         <input type="password" name="password" id="password" required>
         <br>
-        <button type="submit">Зарегистрироваться</button>
+        <button class="button1" type="submit">Зарегистрироваться</button>
     </form>
     {% if error %}
         <p>{{ error }}</p>
