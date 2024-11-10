@@ -32,9 +32,13 @@ def load_user(user_id):
 
 # Корневая страница
 @app.route('/')
-@login_required
 def index():
-    return render_template('index.html', user=current_user.name)
+    if current_user.is_authenticated:
+        # Авторизованный пользователь
+        return render_template('index.html', user=current_user.name)
+    else:
+        # Неавторизованный пользователь
+        return redirect(url_for('login'))
 
 # Страница вход
 @app.route('/login', methods=['POST', 'GET'])
